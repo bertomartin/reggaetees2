@@ -31,6 +31,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'unicorn', '~> 4.9.0'
+group :development do 
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler' #integrate bundler with capistrano
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-cookbook', require: false #helper tasks
+  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,4 +51,15 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+# Added by savoryteam
+gem 'devise'
+gem 'devise-async' #send email in the background
+
+gem 'haml-rails'
+gem 'html2haml'
+
+gem 'sidekiq'
+gem 'sinatra', require: false #both sinatra and slim being used by the sidekiq web interface
+gem 'slim'
 
