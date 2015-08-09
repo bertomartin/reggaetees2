@@ -26,9 +26,9 @@ set :bundle_binstubs, nil
 
 
 before :deploy, 'deploy:check_revision'
+after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
 
 namespace :deploy do
-  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
