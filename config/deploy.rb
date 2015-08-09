@@ -24,6 +24,10 @@ set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :bundle_binstubs, nil
 
+
+before :deploy, 'deploy:check_revision'
+after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+
 namespace :deploy do
 
   after :restart, :clear_cache do
