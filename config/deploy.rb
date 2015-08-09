@@ -25,11 +25,11 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :bundle_binstubs, nil
 
 
-before :deploy, 'deploy:check_revision'
-after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+
 
 namespace :deploy do
-
+  before :deploy, 'deploy:check_revision'
+  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
